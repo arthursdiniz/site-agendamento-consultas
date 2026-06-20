@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NutriLife</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 2rem;
+        }
+        .auth-box {
+            width: 100%;
+            max-width: 400px;
+        }
+        .auth-box h2 {
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        .auth-tab.active {
+            color: var(--text-main);
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+        .auth-form {
+            display: none;
+        }
+        .auth-form.active {
+            display: block;
+        }
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">NutriLife</a>
+    </nav>
+
+    <div class="auth-container">
+        <div class="glass-panel auth-box">
+            <h2>Bem-vindo de volta</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchTab('register')">Cadastro</div>
+            </div>
+
+            <div id="loginForm" class="auth-form active">
+                <div id="loginError" class="error-message"></div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button onclick="login()" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </div>
+
+            <div id="registerForm" class="auth-form">
+                <div id="registerError" class="error-message"></div>
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="regName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="regEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="regPassword" class="form-control" required>
+                </div>
+                <!-- Escondido, assume-se CLIENTE na criação pelo portal aberto -->
+                <button onclick="register()" class="btn btn-primary" style="width: 100%;">Criar Conta</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = localStorage.getItem('user');
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

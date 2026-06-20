@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Cliente - NutriLife</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-container {
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            flex: 1;
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        .diet-item, .apt-item {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .apt-item p {
+            margin: 0;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .apt-item span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">NutriLife</a>
+        <div class="nav-links">
+            <span id="userNameDisplay" style="margin-right: 1rem; color: var(--text-muted);"></span>
+            <a href="#" onclick="logout()">Sair</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="main-content">
+            <div class="header-actions">
+                <h2>Minhas Dietas</h2>
+            </div>
+            
+            <div id="dietsList">
+                <p style="color: var(--text-muted);">Carregando dietas...</p>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="card">
+                <h3>Agendamentos</h3>
+                <div id="aptList">
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Carregando...</p>
+                </div>
+                <a href="agendamento.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">Novo Agendamento</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Carrega dados iniciais do Dashboard
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('userNameDisplay').textContent = 'Olá, ' + user.name;
+            
+            loadDiets();
+            loadAppointments();
+        });
+    </script>
+</body>
+</html>

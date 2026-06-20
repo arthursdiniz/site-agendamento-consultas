@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Consulta - NutriLife</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .agenda-container {
+            padding: 2rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+            flex: 1;
+        }
+        .agenda-box {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .time-slot {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--text-main);
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .time-slot:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .time-slot.selected {
+            background: var(--primary-hover);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .time-slot.occupied {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+        .time-slot.occupied:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="dashboard.html" class="logo">NutriLife</a>
+        <div class="nav-links">
+            <a href="dashboard.html">Voltar ao Painel</a>
+        </div>
+    </nav>
+
+    <div class="agenda-container">
+        <div class="agenda-box">
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Agendar Nova Consulta</h2>
+            
+            <div class="form-group">
+                <label>Selecione a Data:</label>
+                <input type="date" id="agendaDate" class="form-control" onchange="fetchTimeSlots()" min="">
+            </div>
+
+            <div id="slotsContainer" style="display: none;">
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-muted);">Horários Disponíveis</h3>
+                <div class="time-slots" id="timeSlots"></div>
+                
+                <button class="btn btn-primary" id="btnConfirmar" style="width: 100%; margin-top: 2rem; display: none;" onclick="confirmAppointment()">Confirmar Agendamento</button>
+            </div>
+            
+            <p id="agendaMsg" style="margin-top: 1rem; text-align: center;"></p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('agendaDate').min = today;
+        });
+    </script>
+</body>
+</html>

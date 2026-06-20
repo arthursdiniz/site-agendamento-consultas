@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLife - Agendamento e Consultas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">NutriLife</a>
+        <div class="nav-links">
+            <a href="login.html">Login</a>
+            <a href="login.html" class="btn btn-primary" style="margin-left: 1rem;">Agendar Agora</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <h1>Sua jornada para uma vida mais saudável começa aqui.</h1>
+        <p>Agende sua consulta online, acesse suas dietas personalizadas e acompanhe seu progresso de forma simples e intuitiva.</p>
+        <div class="hero-actions">
+            <a href="login.html" class="btn btn-primary">Começar Minha Jornada</a>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = localStorage.getItem('user');
+            if (user) {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.innerHTML = `
+                    <a href="dashboard.html" style="font-weight: 500; margin-right: 1.5rem; text-decoration: none; color: var(--text-main);">Meu Painel</a>
+                    <a href="#" onclick="logout()" style="font-weight: 500; text-decoration: none; color: var(--text-main);">Sair</a>
+                `;
+                
+                const heroActions = document.querySelector('.hero-actions');
+                heroActions.innerHTML = `<a href="dashboard.html" class="btn btn-primary">Ir para o Meu Painel</a>`;
+            }
+        });
+    </script>
+</body>
+</html>
