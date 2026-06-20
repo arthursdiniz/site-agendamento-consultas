@@ -16,7 +16,7 @@ async function login() {
     const password = document.getElementById('loginPassword').value;
     const errorDiv = document.getElementById('loginError');
     
-    // Configurar basic auth no localStorage para simplificar o protótipo
+    // Configurar basic auth no localStorage
     const credentials = btoa(email + ":" + password);
     
     try {

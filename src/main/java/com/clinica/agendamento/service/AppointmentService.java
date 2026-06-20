@@ -26,7 +26,7 @@ public class AppointmentService {
     }
 
     public Appointment scheduleAppointment(Appointment appointment, User client) {
-        // Verifica se já existe agendamento no mesmo dia e horário (simplificado para horários exatos)
+        // Verifica se já existe agendamento no mesmo dia e horário
         List<Appointment> existingAppointments = appointmentRepository.findByDate(appointment.getDate());
         
         boolean hasConflict = existingAppointments.stream()
